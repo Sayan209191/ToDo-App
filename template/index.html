@@ -24,43 +24,67 @@ To Do List
                 </thead>
                 <tbody>
                     {% for tasks  in  task%}
+                    {% if not tasks.complete  %}
                     <tr>
-                        <td><p class="list-item" style="color:black; pointer:cursor;">{{tasks.title}}<p></td>
+                        <td><p class="list-item" data-popup-id="popup-{{tasks.task_id}}">{{tasks.title}}<p></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td>
-                            <a href="#"><button class="btn btn-light">Edit</a>
+                            <form action="{% url 'task:editTask' tasks.task_id %}" method="GET">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-info">Edit</button>
+                            </form>
                         </td>
-                        <div id="myPopup" class="popup"> 
+                        <div id="popup-{{tasks.task_id}}" class="popup"> 
                             <div class="popup-content">
                                 <h1 style="color:green;">
                                     {{tasks.title}}
                                 </h1>
                                 <p>{{tasks.description}}</p>
                                 <p>Due Date : {{tasks.due_date}}</p>
-                                <button id="closePopup">
+                                <button class="closePopup">
                                     Close
                                 </button>
                             </div>
                         </div>
                     </tr>
-                    
+                    {% endif %}
                     {% endfor %}
 
                 </tbody>
             </table>
             
-            <a href="/addtask"><button class="btn btn-light">Add New Task</a>
+            <a href="/addtask" style="color:white;"><button class="btn btn-info">Add New Task</a>
             
             
         </div>
         <div class="work">
             <h2 style="text-align: center; color:white; font-weight:bold;font-size:50px">COMPLETE WORK</h2>
-            {% for tasks in  task%}
-            <li class="#" style="font-size=20px;">{{task.title}}
-            </li>
+            <table>
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                   {% for tasks in  task%}
+                   {% if tasks.complete %}
+                   <tr>
+                    <td><p class="list-item" data-popup-id="popup-{{tasks.task_id}}" style="color:black; pointer:cursor;">{{tasks.title}}<p></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+            
+            
+            {% endif %}
             {% endfor %}
 
         </div>
@@ -72,19 +96,25 @@ To Do List
 <script>
     document.querySelectorAll('.list-item').forEach(item => {
         item.addEventListener('click', function () {
-            myPopup.classList.add('show');
+            var popupId = this.dataset.popupId;
+            document.getElementById(popupId).classList.add('show');
         });
     });
-
-    closePopup.addEventListener('click', function () {
-        myPopup.classList.remove('show');
+    
+    document.querySelectorAll('.closePopup').forEach(button => {
+        button.addEventListener('click', function () {
+            this.parentElement.parentElement.classList.remove('show');
+        });
     });
-
+    
     window.addEventListener('click', function (event) {
-        if (event.target == myPopup) {
-            myPopup.classList.remove('show');
+        if (event.target.classList.contains('popup')) {
+            event.target.classList.remove('show');
         }
     });
+    
+    
+    
 </script>
 {% endblock script %}
 {% endblock body %}

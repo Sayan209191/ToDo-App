@@ -93,3 +93,21 @@ def addTask(request):
         return redirect('/home')
 
     return render(request, 'addtask.html')
+
+@login_required(login_url='/login')
+def editTask(request, task_id):
+    task = get_object_or_404(Task, task_id=task_id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        due_date = request.POST.get('due_date')
+        
+        
+        task.title = title;
+        task.description = description;
+        task.due_date = due_date;
+        task.complete = 'complete' in request.POST
+        task.save()
+        return redirect('/home')
+    else:
+        return render(request, 'edittask.html', {'task': task})
