@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}
+To Do List
+{% endblock title %}
+
+{% block body %}
+<section>
+    <div class="containeer">
+        <div class="work">
+            
+            <h1 style="text-align: center; color:white; font-weight:bold;font-size:50px">Due Task</h1>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tasks  in  task%}
+                    <tr>
+                        <td><p class="list-item" style="color:black; pointer:cursor;">{{tasks.title}}<p></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#"><button class="btn btn-light">Edit</a>
+                        </td>
+                        <div id="myPopup" class="popup"> 
+                            <div class="popup-content">
+                                <h1 style="color:green;">
+                                    {{tasks.title}}
+                                </h1>
+                                <p>{{tasks.description}}</p>
+                                <p>Due Date : {{tasks.due_date}}</p>
+                                <button id="closePopup">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </tr>
+                    
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            
+            <a href="/addtask"><button class="btn btn-light">Add New Task</a>
+            
+            
+        </div>
+        <div class="work">
+            <h2 style="text-align: center; color:white; font-weight:bold;font-size:50px">COMPLETE WORK</h2>
+            {% for tasks in  task%}
+            <li class="#" style="font-size=20px;">{{task.title}}
+            </li>
+            {% endfor %}
+
+        </div>
+        
+
+    </div>
+</section>
+{% block script %}
+<script>
+    document.querySelectorAll('.list-item').forEach(item => {
+        item.addEventListener('click', function () {
+            myPopup.classList.add('show');
+        });
+    });
+
+    closePopup.addEventListener('click', function () {
+        myPopup.classList.remove('show');
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target == myPopup) {
+            myPopup.classList.remove('show');
+        }
+    });
+</script>
+{% endblock script %}
+{% endblock body %}
+
+
+
+
+
