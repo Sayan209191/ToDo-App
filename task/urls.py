@@ -11,4 +11,5 @@ urlpatterns = [
     path('logout/', views.handlelogout, name='handlelogout'),
     path('addtask', views.addTask, name="addtask"),
     path('editTask/<int:task_id>/', views.editTask, name='editTask'),
+    path('calender', views.calender, name='calender')
 ]

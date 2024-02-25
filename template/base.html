@@ -25,7 +25,6 @@
   <!-- MDB -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 </head>
 
 <body>
@@ -38,15 +37,15 @@
                 class="fas fa-bars me-2"></i></button>
           </div>
           <div class="flex3 text-center" id="siteBrand">
-            To Do List
+            <h1>To Do List</h1>
           </div>
           
         <div class="flex2 text-end d-none d-md-block">
           {% if  request.user.is_authenticated %}            
-          <a href=""><button class="btn btn-primary btn-lg">Welcome {{user.username}}</button></a>
+          <button class="btn btn-primary btn-lg">Welcome {{user.username}}</button>
         {% else %}
-          <a href="/signup"><button class="btn btn-primary btn-lg">REGISTER</a>
-          <a href="/login"><button class="btn btn-success">Login</button></a>
+          <a href="/login" style="color:white;"><button class="btn btn-primary btn-lg">Login</a>
+          {% comment %} <a href="/login"><button class="btn btn-success">Login</button></a> {% endcomment %}
           {% endif %}
         </div>
         
@@ -65,7 +64,7 @@
             <span class="fs-4"></span></a>
             <hr>
           <a href="/home" class="nav-menu-item"><i class="fas fa-home me-3"></i>Home</a>
-          <a href="#" class="nav-menu-item"><i class="fas fa-calendar-alt me-3"></i>Calender</a>
+          <a href="/calender" class="nav-menu-item"><i class="fas fa-calendar-alt me-3"></i>Calender</a>
           <a href="#" class="nav-menu-item"><i class="fas fa-info-circle me-3"></i>About Us</a>
           <a href="/logout" class="nav-menu-item"><i class="fas fa-sign-out-alt me-3"></i>Logout</a>
         </div>

@@ -9,9 +9,9 @@ To Do List
     <div class="containeer">
         <div class="work">
             
-            <h1 style="text-align: center; color:white; font-weight:bold;font-size:50px">Due Task</h1>
+            <h1>Due Task</h1>
             
-            <table>
+            <table class="padding-table-columns">
                 <thead>
                     <tr>
                         <td></td>
@@ -26,14 +26,15 @@ To Do List
                     {% for tasks  in  task%}
                     {% if not tasks.complete  %}
                     <tr>
+                        <td><input type="checkbox" name="complete"></td>
                         <td><p class="list-item" data-popup-id="popup-{{tasks.task_id}}">{{tasks.title}}<p></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td>
                             <form action="{% url 'task:editTask' tasks.task_id %}" method="GET">
                                 {% csrf_token %}
+                                
                                 <button type="submit" class="btn btn-info">Edit</button>
                             </form>
                         </td>
@@ -61,7 +62,7 @@ To Do List
             
         </div>
         <div class="work">
-            <h2 style="text-align: center; color:white; font-weight:bold;font-size:50px">COMPLETE WORK</h2>
+            <h1>Complete</h2>
             <table>
                 <thead>
                     <tr>

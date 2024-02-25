@@ -68,6 +68,7 @@ def handlelogout(request):
 def index(request):
     return render(request, "index.html")
 
+@login_required(login_url='/login')
 def home(request):
     task = Task.objects.filter(user=request.user).all()
     return render(request,"index.html", {'task':task})
@@ -111,3 +112,6 @@ def editTask(request, task_id):
         return redirect('/home')
     else:
         return render(request, 'edittask.html', {'task': task})
+
+def calender(request) :
+    return render(request, 'calender.html')
