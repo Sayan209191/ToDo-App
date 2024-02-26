@@ -112,6 +112,16 @@ def editTask(request, task_id):
         return redirect('/home')
     else:
         return render(request, 'edittask.html', {'task': task})
+    
+@login_required(login_url='/login')
+def completeTask(request, task_id):
+    task = Task.objects.get(pk=task_id)
+    task.complete = True
+    task.save()
+    return redirect('/home')    
 
 def calender(request) :
     return render(request, 'calender.html')
+
+def about(request) :
+    return render(request, "aboutus.html")

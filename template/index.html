@@ -8,9 +8,7 @@ To Do List
 <section>
     <div class="containeer">
         <div class="work">
-            
             <h1>Due Task</h1>
-            
             <table class="padding-table-columns">
                 <thead>
                     <tr>
@@ -26,7 +24,10 @@ To Do List
                     {% for tasks  in  task%}
                     {% if not tasks.complete  %}
                     <tr>
-                        <td><input type="checkbox" name="complete"></td>
+                        <td><form action="{% url 'task:completeTask' tasks.task_id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="checkbox" name="complete" onchange="this.form.submit()">
+                        </form></td>
                         <td><p class="list-item" data-popup-id="popup-{{tasks.task_id}}">{{tasks.title}}<p></td>
                         <td></td>
                         <td></td>

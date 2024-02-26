@@ -140,7 +140,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,'/static/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
-    'site_header':"INFYKART",
-    'site_brand' : "You Order & We delevired",
-    'copyright' : "INFYKART-Sayan"
+    'site_header':"To Do App",
+    'site_brand' : "Make Your Plan & Execute",
+    'copyright' : "Sayan_031"
 }

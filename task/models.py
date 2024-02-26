@@ -8,7 +8,7 @@ class Task(models.Model) :
     task_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length = 200, null=True)
-    description = models.CharField(max_length = 500)
+    description = models.CharField(max_length = 500, null=True)
     complete = models.BooleanField(default = False)
     created = models.DateTimeField(auto_now_add = True)
     due_date = models.DateField(blank=True, null=True)
