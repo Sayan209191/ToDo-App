@@ -119,7 +119,10 @@ form .form-row .textarea {
 .textarea textarea:valid~.underline:before {
     transform: scale(1);
 }
-
+.input-data input[type="checkbox"] {
+    margin-top: 5px;
+    display: block;
+}
 .submit-btn .input-data {
     overflow: hidden;
     height: 45px !important;

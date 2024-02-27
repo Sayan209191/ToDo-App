@@ -69,12 +69,10 @@ footer {
     justify-content: center;
 }
 .icon-link {
+    color: #fff;
     margin-right: 20px;
 }
 .icon-link a {
-    text-decoration: none;  /* This will remove the underline */
+    text-decoration: none;  
 }
-.footer-ele {
-    display: flex;
-    margin-left: 20px;
-}
+

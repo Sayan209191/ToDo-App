@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.models import User
-from task.models import Task 
+from task.models import Task , Contact
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
@@ -125,3 +125,26 @@ def calender(request) :
 
 def about(request) :
     return render(request, "aboutus.html")
+
+
+def contact(request) :
+    if(request.method == 'POST') :
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        contact = Contact.objects.create(
+            name = name,
+            email = email,
+            message = message,
+            user = request.user,
+        )
+        contact.save()
+        messages.success(request, "Your query has been submitted. We'll reach out to you soon!")
+        
+        return redirect('/home')
+    
+    return render(request, 'contactus.html')
+
+# def resetpassword(request,) :
+#     return render(request, )

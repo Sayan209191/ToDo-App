@@ -590,3 +590,9 @@ label.valid {
     margin-bottom: 10px; } }
 
 /*# sourceMappingURL=style.css.map */
+
+.container a {
+  color: blue;
+  font-size: 20px;
+  font-weight: 100;
+}
