@@ -41,7 +41,7 @@ EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 
 
 ALLOWED_HOSTS = ['*']
-PORT = 8080
+
 
 
 # Application definition
