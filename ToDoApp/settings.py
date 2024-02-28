@@ -42,8 +42,6 @@ EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 
 ALLOWED_HOSTS = ['*']
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
