@@ -31,6 +31,15 @@ SECRET_KEY = 'django-insecure-g1!u$dz!-hk*-wg1m(%t33n_4z8sg2w^+o5gq6ttm_$c8wq^o3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='sayan.031.ghorui@gmail.com'
+EMAIL_HOST_PASSWORD='lznr ybet xccs njgp'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+
+
 ALLOWED_HOSTS = []
 
 
@@ -144,3 +153,6 @@ JAZZMIN_SETTINGS = {
     'site_brand' : "Make Your Plan & Execute",
     'copyright' : "Sayan_031"
 }
+
+
+     
