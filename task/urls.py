@@ -1,6 +1,7 @@
 from django.urls import path
 from task import views
 
+
 app_name = 'task'
 
 urlpatterns = [
@@ -15,7 +16,6 @@ urlpatterns = [
     path('calender', views.calender, name='calender'),
     path('about', views.about, name='about'),
     path('contact', views.contact, name='contact'),
-    path('activate/<uidb64>/<token>',views.ActivateAccountView.as_view(),name='activate'),
     path('request-reset-email/',views.RequestResetEmailView.as_view(),name='request-reset-email'),
     path('set-new-password/<uidb64>/<token>',views.SetNewPasswordView.as_view(),name='set-new-password'),
 ]

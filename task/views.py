@@ -25,58 +25,59 @@ from django.views.generic import View
 
 # sign up 
 def signup(request):
-    if request.method=="POST":
-        email=request.POST['email']
-        username=request.POST["name"]
-        password=request.POST['pass1']
-        confirm_password=request.POST['pass2']
-        if password!=confirm_password:
-            messages.warning(request,"Password is Not Matching")
-            return render(request,'signup.html')                   
+    if request.method == "POST":
+        email = request.POST['email']
+        username = request.POST["name"]
+        password = request.POST['pass1']
+        confirm_password = request.POST['pass2']
+        
+        if password != confirm_password:
+            messages.warning(request, "Passwords do not match")
+            return render(request, 'signup.html')
+                   
         try:
             if User.objects.get(username=email):
-                # return HttpResponse("email already exist")
-                messages.info(request,"Email is Taken")
-                return render(request,'signup.html')
-        except Exception as identifier:
+                messages.info(request, "Email is already taken")
+                return render(request, 'signup.html')
+        except User.DoesNotExist:
             pass
-        user = User.objects.create_user(username,email,password)
-        user.is_active=True
+        
+        # Create user and activate immediately
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.is_active = True  # Activate user account
         user.save()
+        
+        messages.success(request, "Signup successful. You can now login.")
         return redirect('/login')
-    return render(request,"signup.html")
+    
+    return render(request, "signup.html")
 
-class ActivateAccountView(View):
-    def get(self,request,uidb64,token):
-        try:
-            uid=force_str(urlsafe_base64_decode(uidb64))
-            user=User.objects.get(pk=uid)
-        except Exception as identifier:
-            user=None
-        if user is not None and generate_token.check_token(user,token):
-            user.is_active=True
-            user.save()
-            messages.info(request,"Account Activated Successfully")
-            return redirect('/login')
-        return render(request,'activatefail.html')
+
+
 # sign in
 def handlelogin(request):
-    if request.method=="POST":
-
-        username=request.POST['username']
-        userpassword=request.POST['pass']
-        myuser=authenticate(username=username,password=userpassword)
-
-        if myuser is not None:
-            login(request,myuser)
-            messages.success(request,"Login Success")
-            return redirect('/home')
-
-        else:
-            messages.error(request,"Invalid Credentials")
+    if request.method == "POST":
+        username = request.POST['username']
+        userpassword = request.POST['pass']
+        print(username)
+        print(userpassword)
+        
+        # Bypass authentication (temporary workaround for testing)
+        try:
+            myuser = User.objects.get(username=username)
+            if myuser.check_password(userpassword):
+                login(request, myuser)
+                messages.success(request, "Login Success")
+                return redirect('/home')
+            else:
+                messages.error(request, "Invalid Credentials")
+                return redirect('/login')
+        except User.DoesNotExist:
+            messages.error(request, "Invalid Credentials")
             return redirect('/login')
 
-    return render(request,'login.html')  
+    return render(request, 'login.html')
+ 
 
 # logout
 def handlelogout(request):
