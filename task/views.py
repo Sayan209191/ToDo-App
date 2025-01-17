@@ -36,8 +36,11 @@ def signup(request):
             return render(request, 'signup.html')
                    
         try:
-            if User.objects.get(username=email):
-                messages.info(request, "Email is already taken")
+            if User.objects.get(username=username):
+                messages.info(request, "Username already exists. Please choose a different username.")
+                return render(request, 'signup.html')
+            elif User.objects.get(email=email):
+                messages.info(request, "Email already exists. Please choose a different email.")
                 return render(request, 'signup.html')
         except User.DoesNotExist:
             pass
@@ -188,7 +191,7 @@ class RequestResetEmailView(View):
             email_message=EmailMessage(email_subject,message,settings.EMAIL_HOST_USER,[email])
             email_message.send()
 
-            # messages.info(request,f"WE HAVE SENT YOU AN EMAIL WITH INSTRUCTIONS ON HOW TO RESET THE PASSWORD {message} " )
+            messages.info(request, "WE HAVE SENT YOU A Link in Your Register EMAILTO RESET THE PASSWORD  " )
             return render(request,'request-reset-email.html')
         else:
             messages.error(request, "No user exists with the provided email.")

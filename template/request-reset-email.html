@@ -2,40 +2,43 @@
 {% block title %}reset password{% endblock title %} 
 {% block content %}
 
-<div class="card bg-light p-5">
 
-  {% for message in messages %}
-
-  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-    <strong>{{message}}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {% endfor %}
-
+  <div class="card bg-light p-5">
+    <h3 class="text-dark">Request For Password Reset Link</h3>
   
-  <h3 class="text-dark">Request a reset Link</h3>
-
-  <form action="/request-reset-email/" method="post">
-    {% csrf_token %}
-    <br/>
-
-    <label for="email">Email</label>
-    <div class="form-group">
-      <input
-        type="email"
-        class="form-control p-2"
-        id="email"
-        name="email"
-        required
-      />
-    </div>
-   <br>
-    <button type="submit" class="btn btn-dark">Submit</button>
-
-    <br />
-   <a href="/login">Go Back</a>
-    <br />
-  </form>
-</div>
+    <!-- Main Form -->
+    <form action="/request-reset-email/" method="post">
+      {% csrf_token %}
+      <br/>
+  
+      <label for="email">Email</label>
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control p-2"
+          id="email"
+          name="email"
+          required
+        />
+      </div>
+      <br>
+      <button type="submit" class="btn btn-success">Submit</button>
+      <br/>
+      <br/>
+    </form>
+  
+    <!-- Go Back Button -->
+    <form action="/login/" method="get">
+      <button type="submit" class="btn btn-info">Go Back</button>
+    </form>
+  
+    <!-- Popup Message -->
+    {% if messages %}
+      <div id="popup-message" class="popup-message">
+          {% for message in messages %}
+              <p class="{{ message.tags }}">{{ message }}</p>
+          {% endfor %}
+      </div>
+    {% endif %}
 
 {% endblock content %}

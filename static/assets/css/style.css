@@ -596,3 +596,32 @@ label.valid {
   font-size: 20px;
   font-weight: 100;
 }
+
+.popup-message {
+  position: fixed;
+  top: 20px;
+  right: 400px;
+  background-color: #cbbdbd; /* Light red for error messages */
+  color: #030000;
+  padding: 20px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-size: 16px;
+  display: none;
+}
+
+.popup-message.success {
+  background-color: #d4edda; /* Light green for success messages */
+  color: #155724;
+}
+
+.popup-message.info {
+  background-color: #d1ecf1; /* Light blue for info messages */
+  color: #0c5460;
+}
+
+.popup-message.warning {
+  background-color: #fff3cd; /* Light yellow for warning messages */
+  color: #856404;
+}

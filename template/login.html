@@ -9,18 +9,15 @@
             <div class="signin-image">
                 <figure><img src="{% static "assets/images/signin-image.jpg"%}" alt="sing up image"></figure>
                 <div class="signin-reset">
-                    <a href="/signup/" class="signup-image-link">Create an account</a>
+                    {% comment %} <a href="/signup/" class="signup-image-link">Create an account</a> {% endcomment %}
+                    <form action="/signup/" method="get">
+                        <button type="submit" class="btn btn-info">Create an account</button>
+                    </form>
                 </div>
             </div>
 
             <div class="signin-form">
                 <h2 class="form-title">Sign In</h2>
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                        <strong>{{ message }}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                {% endfor %}
                 <form method="POST" action="/login/" class="register-form" id="login-form">
                     {% csrf_token %}
                     <div class="form-group">
@@ -31,16 +28,19 @@
                         <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                         <input type="password" name="pass" id="pass" placeholder="Password"/>
                     </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-                    </div>
+                    
                     <div class="form-group form-button">
                         <button type="submit" class="btn btn-info"> Log In</button>
                     </div>
+                    {% comment %} <div class="form-group form-button">
+                        <button type="submit" class="btn btn-info"> Forget PassWord</button>
+                    </div> {% endcomment %}
                 </form>
-                <a href="/request-reset-email" class="signup-image-link"> Forget PassWord</a>
-                
+                {% comment %} <a href="/request-reset-email" class="signup-image-link"> Forget PassWord</a> {% endcomment %}
+                <br/>
+                <form action="/request-reset-email/" method="POST">
+                    <button type="submit" class="btn btn-info">Forget PassWord</button>
+                </form>
             </div>
         </div>
     </div>

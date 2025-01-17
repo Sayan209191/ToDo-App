@@ -26,18 +26,27 @@
                         <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                         <input type="password" name="pass2" id="pass2" placeholder="Repeat your password" required/>
                     </div>
-                    <div class="form-group">
+                    {% comment %} <div class="form-group">
                         <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                         <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
-                    </div>
+                    </div> {% endcomment %}
                     <div class="form-group form-button">
                         <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
                     </div>
+                    {% if messages %}
+                        <div id="popup-message" class="popup-message">
+                            {% for message in messages %}
+                                <p class="{{ message.tags }}">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </form>
             </div>
             <div class="signup-image">
                 <figure><img src="{% static "assets/images/signup-image.jpg"%}" alt="sing up image"></figure>
-                <a href="/login/" class="signup-image-link">I am already member</a>
+                <form action="/login/" method="get">
+                    <button type="submit" class="btn btn-info">I am already a member</button>
+                </form>
             </div>
         </div>
     </div>
@@ -45,3 +54,17 @@
 
 
 {% endblock body %}
+
+{% block script %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const popup = document.getElementById("popup-message");
+        if (popup) {
+            popup.style.display = "block";
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 3000); // Hide after 3 seconds
+        }
+    });
+</script>
+{% endblock script %}
