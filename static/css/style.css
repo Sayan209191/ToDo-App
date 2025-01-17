@@ -6,6 +6,8 @@ body {
     background: url("/static/images/photo.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 p {
     font-family: 'Crimson Pro', serif;
